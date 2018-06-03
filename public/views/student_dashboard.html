@@ -1,0 +1,46 @@
+<style>
+	.arrow{
+		background: #33b5e5; cursor: pointer;
+	}
+	
+	.arrow:hover{
+		background: #81d4fa;
+	}
+	
+	.padding_slot{
+		padding-top: 10px; padding-bottom: 10px; cursor: pointer; margin: 5px; background: #efefef;
+	}
+	
+	.padding_slot:hover{
+		background: #f4ff81;
+	}
+</style>
+
+<div class="container">
+	<div class="row" ng-if="loading">Loading...</div>
+
+	<div class="row" ng-if="!loading">
+		<div class="col-md-12" style="padding: 15px; border: 1px solid #efefef;">
+			<span>{{us}}</span>
+			<span ng-click="doLogout()" style="float: right; cursor: pointer;">Logout</span>
+		</div>
+		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
+			<h3>Book Slot</h3>
+		</div>
+		<div class="col-md-6" style="margin: 20px auto 50px auto; border: 1px solid #eee; padding: 15px;">
+			<div class="row" style="text-align: center; margin: auto 0;">
+				<div class="col-md-2 arrow" ng-click="decDate()"><i class="material-icons">arrow_back_ios</i></div>
+				<div class="col-md-8" style="font-weight: bold;">{{today | date:'dd-MMM-yyyy'}}</div>
+				<div class="col-md-2 arrow" ng-click="incDate()"><i class="material-icons">arrow_forward_ios</i></div>
+			</div>
+			<div class="row" style="margin: 10px; text-align: center;">
+				<div class="col-md-12 padding_slot" ng-click="checkSlot(today, '1pm - 2pm') ? '':bookSlot('1pm - 2pm')" ng-style="checkSlot(today, '1pm - 2pm')||slotTime=='1pm - 2pm'?{'background':'#ffcc80'}:{}">1pm - 2pm</div>
+				<div class="col-md-12 padding_slot" ng-click="checkSlot(today, '4pm - 5pm') ? '':bookSlot('4pm - 5pm')" ng-style="checkSlot(today, '4pm - 5pm')||slotTime=='4pm - 5pm'?{'background':'#ffcc80'}:{}">4pm - 5m</div>
+				<div class="col-md-12 padding_slot" ng-click="checkSlot(today, '6pm - 7pm') ? '':bookSlot('6pm - 7pm')" ng-style="checkSlot(today, '6pm - 7pm')||slotTime=='6pm - 7pm'?{'background':'#ffcc80'}:{}">6pm - 7pm</div>
+			</div>
+			<div class="col-md-12" style="text-align: center;">
+				<button class="btn btn-danger" ng-click="requestSlot(today, slotTime)" style="cursor: pointer;" ng-disabled="!slotTime">Request Availability</button>
+			</div>
+		</div>
+	</div>
+</div>

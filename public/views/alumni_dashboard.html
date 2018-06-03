@@ -1,0 +1,61 @@
+<style>
+	.arrow{
+		background: #33b5e5; cursor: pointer;
+	}
+	
+	.arrow:hover{
+		background: #81d4fa;
+	}
+	
+	.padding_slot{
+		padding-top: 10px; padding-bottom: 10px; cursor: pointer; margin: 5px; background: #efefef;
+	}
+	
+	.padding_slot:hover{
+		background: #f4ff81;
+	}
+	
+	.option{
+		cursor: pointer; text-align: center;
+	}
+</style>
+
+<div class="container">
+	<div class="row" ng-if="loading">Loading...</div>
+
+	<div class="row" ng-if="!loading">
+		<div class="col-md-12" style="padding: 15px; border: 1px solid #efefef;">
+			<span>{{us}}</span>
+			<span ng-click="doLogout()" style="float: right; cursor: pointer;">Logout</span>
+		</div>
+		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
+			<h3>Confirm Slot</h3>
+		</div>
+		<div class="col-md-6" style="margin: 20px auto 50px auto; border: 1px solid #eee; padding: 15px;">
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="text-align: center;">Student Name</th>
+						<th style="text-align: center;">Date</th>
+						<th style="text-align: center;">Time Slot</th>
+						<th style="text-align: center;">Select / Reject</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="sl in allLatestSlots">
+						<td style="text-align: center;">{{sl.by}}</td>
+						<td style="text-align: center;">{{sl.when.date | date:'dd-MMM-yyyy'}}</td>
+						<td style="text-align: center;" style="text-align: center;">{{sl.when.time}}</td>
+						<td style="text-align: center; border: 1px solid #efefef;">
+							<div class="row">
+								<div class="col-md-4 option" ng-style="sl.status == 'Reject'?{'background':'#ffd740'}:{}" ng-click="setStatus($index, 'Reject')">Reject</div>
+								<div class="col-md-4 option" ng-style="sl.status == 'Requested'?{'background':'#ffd740'}:{}" ng-click="setStatus($index, 'Requested')">-</div>
+								<div class="col-md-4 option" ng-style="sl.status == 'Select'?{'background':'#ffd740'}:{}" ng-click="setStatus($index, 'Select')">Select</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
